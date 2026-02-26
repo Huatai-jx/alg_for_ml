@@ -7858,7 +7858,7 @@ $K=5$, Class 1, among the 5 closest points, there are 3 squares and 2 circles.</
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Train accuracy: 94.737 %
+<pre>Train accuracy: 92.105 %
 Predicted test class, K=4: 1
 </pre>
 </div>
@@ -7933,103 +7933,82 @@ for a symmetric matrix $A$ and a vector $x$ that does not depend on $A$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Your-answer-here:">Your answer here:<a class="anchor-link" href="#Your-answer-here:">¶</a></h4><p><strong>2.1.1</strong></p>
+<h4 id="Your-answer-here:">Your answer here:<a class="anchor-link" href="#Your-answer-here:">¶</a></h4><p>$2.1.1$</p>
 <p>We want the posterior probability</p>
-<p>$$
+<p>$
 P(y_n=c \mid x_n, X, y).
-$$</p>
+$</p>
 <p>We start from Bayes rule:</p>
-<p>$$
-P(y_n=c \mid x_n,X,y)
-=
-\frac{
-p(x_n \mid y_n=c,X,y)\,P(y_n=c \mid X,y)
+<h1 id="$%0AP(y_n=c-%5Cmid-x_n,X,y)">$
+P(y_n=c \mid x_n,X,y)<a class="anchor-link" href="#$%0AP(y_n=c-%5Cmid-x_n,X,y)">¶</a></h1><p>\frac{
+p(x_n \mid y_n=c,X,y),P(y_n=c \mid X,y)
 }{
 p(x_n \mid X,y)
 }.
-$$</p>
-<p>For two classes (c \in {0,1}):</p>
-<p>$$
-P(y_n=c \mid x_n,X,y)
-=
-\frac{
-p(x_n \mid y_n=c,X,y)\,P(y_n=c \mid X,y)
+$</p>
+<p>For two classes $c \in \{0,1\}$:</p>
+<h1 id="$%0AP(y_n=c-%5Cmid-x_n,X,y)">$
+P(y_n=c \mid x_n,X,y)<a class="anchor-link" href="#$%0AP(y_n=c-%5Cmid-x_n,X,y)">¶</a></h1><p>\frac{
+p(x_n \mid y_n=c,X,y),P(y_n=c \mid X,y)
 }{
-\sum_{c' \in \{0,1\}}
-p(x_n \mid y_n=c',X,y)\,P(y_n=c' \mid X,y)
+\sum_{c' \in {0,1}}
+p(x_n \mid y_n=c',X,y),P(y_n=c' \mid X,y)
 }.
-$$</p>
-<p>Let (x_n=[x_{n1},x_{n2}]^T).</p>
+$</p>
+<h2 id="Naive-Bayes-assumption">Naive Bayes assumption<a class="anchor-link" href="#Naive-Bayes-assumption">¶</a></h2><p>Let $x_n=[x_{n1},x_{n2}]^T$.</p>
 <p>We assume the features are independent:</p>
-<p>$$
-p(x_n \mid y_n=c,X,y)
-=
-\prod_{d=1}^{2}
+<h1 id="$%0Ap(x_n-%5Cmid-y_n=c,X,y)">$
+p(x_n \mid y_n=c,X,y)<a class="anchor-link" href="#$%0Ap(x_n-%5Cmid-y_n=c,X,y)">¶</a></h1><p>\prod_{d=1}^{2}
 p(x_{nd} \mid y_n=c,X,y).
-$$</p>
+$</p>
 <p>Each feature follows a Gaussian:</p>
-<p>$$
-p(x_{nd} \mid y_n=c,X,y)
-=
-\mathcal{N}(x_{nd} \mid \mu_{cd}, \sigma_{cd}^2).
-$$</p>
+<h1 id="$%0Ap(x_%7Bnd%7D-%5Cmid-y_n=c,X,y)">$
+p(x_{nd} \mid y_n=c,X,y)<a class="anchor-link" href="#$%0Ap(x_%7Bnd%7D-%5Cmid-y_n=c,X,y)">¶</a></h1><p>\mathcal{N}(x_{nd} \mid \mu_{cd}, \sigma_{cd}^2).
+$</p>
 <p>So,</p>
-<p>$$
-p(x_n \mid y_n=c,X,y)
-=
-\prod_{d=1}^{2}
+<h1 id="$%0Ap(x_n-%5Cmid-y_n=c,X,y)">$
+p(x_n \mid y_n=c,X,y)<a class="anchor-link" href="#$%0Ap(x_n-%5Cmid-y_n=c,X,y)">¶</a></h1><p>\prod_{d=1}^{2}
 \mathcal{N}(x_{nd} \mid \mu_{cd}, \sigma_{cd}^2).
-$$</p>
-<p>Gaussian density</p>
-<p>$$
-\mathcal{N}(x \mid \mu,\sigma^2)
-=
-\frac{1}{\sqrt{2\pi\sigma^2}}
-\exp\!\left(
+$</p>
+<h2 id="Gaussian-density">Gaussian density<a class="anchor-link" href="#Gaussian-density">¶</a></h2><h1 id="$%0A%5Cmathcal%7BN%7D(x-%5Cmid-%5Cmu,%5Csigma%5E2)">$
+\mathcal{N}(x \mid \mu,\sigma^2)<a class="anchor-link" href="#$%0A%5Cmathcal%7BN%7D(x-%5Cmid-%5Cmu,%5Csigma%5E2)">¶</a></h1><p>\frac{1}{\sqrt{2\pi\sigma^2}}
+\exp!\left(
 -\frac{(x-\mu)^2}{2\sigma^2}
 \right).
-$$</p>
+$</p>
 <p>Let</p>
-<p>$$
+<p>$
 \mathcal{I}_c=\{i : y_i=c\},
 \qquad
 N_c = |\mathcal{I}_c|.
-$$</p>
-<p>$$
-\hat{\mu}_{cd}
-=
-\frac{1}{N_c}
-\sum_{i \in \mathcal{I}_c} x_{id}.
-$$</p>
-<p>$$
-\hat{\sigma}_{cd}^2
-=
-\frac{1}{N_c}
-\sum_{i \in \mathcal{I}_c}
-(x_{id}-\hat{\mu}_{cd})^2.
-$$</p>
+$</p>
+<h1 id="$%0A%5Chat%7B%5Cmu%7D_%7Bcd%7D">$
+\hat{\mu}_{cd}<a class="anchor-link" href="#$%0A%5Chat%7B%5Cmu%7D_%7Bcd%7D">¶</a></h1><p>\frac{1}{N_c}
+\sum_{i \in \mathcal{I}<em>c} x</em>{id}.
+$</p>
+<h1 id="$%0A%5Chat%7B%5Csigma%7D_%7Bcd%7D%5E2">$
+\hat{\sigma}_{cd}^2<a class="anchor-link" href="#$%0A%5Chat%7B%5Csigma%7D_%7Bcd%7D%5E2">¶</a></h1><p>\frac{1}{N_c}
+\sum_{i \in \mathcal{I}<em>c}
+(x</em>{id}-\hat{\mu}_{cd})^2.
+$</p>
 <p>We use class size prior:</p>
-<p>$$
-P(y_n=c \mid X,y)
-=
-\frac{N_c}{N}.
-$$</p>
+<h1 id="$%0AP(y_n=c-%5Cmid-X,y)">$
+P(y_n=c \mid X,y)<a class="anchor-link" href="#$%0AP(y_n=c-%5Cmid-X,y)">¶</a></h1><p>\frac{N_c}{N}.
+$</p>
 <p>Insert the likelihood and the prior into Bayes rule:</p>
-<p>$$
-P(y_n=c \mid x_n,X,y)
-=
-\frac{
+<h1 id="$%0AP(y_n=c-%5Cmid-x_n,X,y)">$
+P(y_n=c \mid x_n,X,y)<a class="anchor-link" href="#$%0AP(y_n=c-%5Cmid-x_n,X,y)">¶</a></h1><p>\frac{
 \left(\frac{N_c}{N}\right)
 \prod_{d=1}^{2}
-\mathcal{N}(x_{nd}\mid \hat{\mu}_{cd},\hat{\sigma}_{cd}^2)
+\mathcal{N}(x_{nd}\mid \hat{\mu}<em>{cd},\hat{\sigma}</em>{cd}^2)
 }{
-\sum_{c' \in \{0,1\}}
+\sum_{c' \in {0,1}}
 \left(\frac{N_{c'}}{N}\right)
 \prod_{d=1}^{2}
-\mathcal{N}(x_{nd}\mid \hat{\mu}_{c'd},\hat{\sigma}_{c'd}^2)
+\mathcal{N}(x_{nd}\mid \hat{\mu}<em>{c'd},\hat{\sigma}</em>{c'd}^2)
 }.
-$$</p>
-<p><strong>2.1.2</strong>
+$</p>
+<p>$2.1.2$
 ...</p>
 </div>
 </div>
@@ -8531,7 +8510,7 @@ $</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Parameters (feel free to change)</span>
@@ -8584,9 +8563,9 @@ Predicted test class: 0
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>[&lt;matplotlib.lines.Line2D at 0x7f5bb46169a0&gt;]</pre>
+<pre>[&lt;matplotlib.lines.Line2D at 0x7f2a16499d00&gt;]</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -8827,7 +8806,7 @@ $$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Parameters (feel free to change)</span>
@@ -8911,7 +8890,7 @@ Predicted test class: 1, (prob 0.56)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_breast_cancer</span>
@@ -8962,7 +8941,7 @@ Test set:	 (114, 10) (114,)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Parameters (feel free to change)</span>
@@ -9003,8 +8982,8 @@ Test set:	 (114, 10) (114,)
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>KNN
-	Train accuracy: 94.505 %
-	Test accuracy: 91.228 %
+	Train accuracy: 94.945 %
+	Test accuracy: 92.105 %
 SVM
 	Train accuracy: 93.846 %
 	Test accuracy: 94.737 %
@@ -9015,6 +8994,20 @@ GNB
 	Train accuracy: 92.088 %
 	Test accuracy: 88.596 %
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
 </div>
 </div>
 </div>
