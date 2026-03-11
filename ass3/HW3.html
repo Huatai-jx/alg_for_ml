@@ -9668,7 +9668,14 @@ Train Loss: 0.0539 | Val Loss: 0.3853
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="%F0%9F%93%9D">📝<a class="anchor-link" href="#%F0%9F%93%9D">¶</a></h4>
+<h4 id="%F0%9F%93%9D">📝<a class="anchor-link" href="#%F0%9F%93%9D">¶</a></h4><p>Brief motivation:
+Since this is a cats vs dogs task, we used a VGG-style idea.
+VGG works well for image classification.</p>
+<p>For tuning, we first tried different learning rates.
+We also tested SGD, but Adam worked better.
+Then we added Dropout and BatchNorm.
+After that, we tuned the learning rate again, added weight decay,and trained for more epochs.
+Final, we get validation loss of at most 0.2.</p>
 </div>
 </div>
 </div>
@@ -9728,17 +9735,6 @@ Train Loss: 0.0539 | Val Loss: 0.3853
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="Try-different-lr,-try-SGD-but-back-to-Adam,-then-add-Dropout-and-BatchNorm,-opt-lr-again,-add-weight_decay-and-more-epochs">Try different lr, try SGD but back to Adam, then add Dropout and BatchNorm, opt lr again, add weight_decay and more epochs<a class="anchor-link" href="#Try-different-lr,-try-SGD-but-back-to-Adam,-then-add-Dropout-and-BatchNorm,-opt-lr-again,-add-weight_decay-and-more-epochs">¶</a></h4>
 </div>
 </div>
 </div>
